@@ -1,5 +1,6 @@
 package pairmatching.launcher.status;
 
+import pairmatching.domain.code.FunctionCommand;
 import pairmatching.launcher.Context;
 import pairmatching.launcher.PairmatchingStatus;
 import pairmatching.view.InputView;
@@ -11,8 +12,12 @@ public class SelectFunctionStatus implements PairmatchingStatus {
         pairmatchingContext.resetMatchCount();
         var command = inputView.readPairMatchingServiceCommand();
 
+        return verifyCommand(command);
+    }
+
+    private PairmatchingStatus verifyCommand(FunctionCommand command) {
         if (command.isMatching()) {
-            return new MatchingPairStatus();
+            return new SetMatchingPairStatus();
         }
         if (command.isSearch()) {
             return new PairSearchStatus();
