@@ -11,4 +11,12 @@ public class Crew {
         this.courseCommand = courseCommand;
         this.name = name;
     }
+
+    public CourseCommand getCourseCommand() {
+        return courseCommand;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

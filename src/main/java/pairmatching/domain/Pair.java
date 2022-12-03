@@ -8,13 +8,18 @@ public class Pair {
 
     private List<Crew> crews;
 
-
     private Pair(Crew... crews) {
         this.crews = List.of(crews);
     }
 
     public static List<Pair> createPairs(List<Crew> crews) {
         return pairMatching(crews);
+    }
+
+    public List<String> getNames() {
+        return crews.stream()
+                .map(Crew::getName)
+                .collect(Collectors.toList());
     }
 
     //TODO 홀수 처리 기능
