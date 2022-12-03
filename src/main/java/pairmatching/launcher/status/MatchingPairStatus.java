@@ -9,8 +9,15 @@ public class MatchingPairStatus implements PairmatchingStatus {
     @Override
     public PairmatchingStatus next(Context pairmatchingContext, InputView inputView, OutputView outputView) {
         var pairMatchingSelector = inputView.readPairMatchingSelector();
-
-        outputView.printMatchingResult(pairmatchingContext.matchPair(pairMatchingSelector));
+        try {
+            outputView.printMatchingResult(pairmatchingContext.matchPair(pairMatchingSelector));
+        } catch (IllegalArgumentException stateException) {
+            if (inputView.readReEnter().isRetry()) {
+                return this;
+            }
+        } catch (IllegalStateException stateException) {
+            return new MatchingFailStatus();
+        }
         return new SelectFunctionStatus();
     }
 
