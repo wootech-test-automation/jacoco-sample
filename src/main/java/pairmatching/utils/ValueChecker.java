@@ -8,8 +8,8 @@ public class ValueChecker {
 
     private final List<String> values;
 
-    public static ValueChecker createFromRightValues(String... values) {
-        return new ValueChecker(List.of(values));
+    public static ValueChecker createFromRightValues(List<String> values) {
+        return new ValueChecker(values);
     }
 
     private ValueChecker(List<String> values) {

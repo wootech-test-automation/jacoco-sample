@@ -1,6 +1,8 @@
 package pairmatching.domain.command;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import pairmatching.utils.ValueChecker;
 
 public enum LevelCommand {
@@ -10,10 +12,16 @@ public enum LevelCommand {
     LEVEL4("레벨4"),
     LEVEL5("레벨5");
 
-    private String command;
-    private static ValueChecker valueChecker =
-            ValueChecker.createFromRightValues(LEVEL1.command, LEVEL2.command, LEVEL3.command,
-                    LEVEL4.command, LEVEL5.command);
+
+    private static final ValueChecker valueChecker = ValueChecker.createFromRightValues(addRightValues());
+    public String command;
+
+    static List<String> addRightValues() {
+        return Arrays.stream(LevelCommand.values())
+                .map(command -> command.command)
+                .collect(Collectors.toList());
+    }
+
 
     public static LevelCommand of(String message) {
         valueChecker.validate(message);

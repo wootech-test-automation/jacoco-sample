@@ -1,6 +1,8 @@
 package pairmatching.domain.command;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import pairmatching.utils.ValueChecker;
 
 public enum CourseCommand {
@@ -9,9 +11,16 @@ public enum CourseCommand {
     FRONTEND("프론트엔드", "/frontend-crew.md");
 
     private static final String FILE_PATH_PREFIX = "src/main/resources";
-    private String command;
-    private String path;
-    private static ValueChecker valueChecker = ValueChecker.createFromRightValues(BACKEND.command,FRONTEND.command);
+    private static final ValueChecker valueChecker = ValueChecker.createFromRightValues(addRightValues());
+    public String command;
+    public String path;
+
+    static List<String> addRightValues() {
+        return Arrays.stream(CourseCommand.values())
+                .map(command -> command.command)
+                .collect(Collectors.toList());
+    }
+
 
     public static CourseCommand of(String message) {
         valueChecker.validate(message);

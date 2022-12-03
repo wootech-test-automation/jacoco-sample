@@ -1,6 +1,8 @@
 package pairmatching.domain.command;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import pairmatching.utils.ValueChecker;
 
 public enum FunctionCommand {
@@ -9,10 +11,14 @@ public enum FunctionCommand {
     PAIR_RESET("3"),
     QUIT("Q");
 
-    private String command;
-    private static ValueChecker valueChecker =
-            ValueChecker.createFromRightValues(PAIR_MATCH.command, PAIR_SEARCH.command,
-                    PAIR_RESET.command, QUIT.command);
+    private static final ValueChecker valueChecker = ValueChecker.createFromRightValues(addRightValues());
+    public String command;
+
+    static List<String> addRightValues() {
+        return Arrays.stream(FunctionCommand.values())
+                .map(command -> command.command)
+                .collect(Collectors.toList());
+    }
 
     public static FunctionCommand of(String message) {
         valueChecker.validate(message);
