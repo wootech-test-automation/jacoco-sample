@@ -22,6 +22,10 @@ public class PairOption {
         return course.getPath();
     }
 
+    public CourseCommand getCourse() {
+        return course;
+    }
+
     public boolean isSameOption(PairOption other) {
         if (!course.command.equals(other.course.command)) {
             return false;
