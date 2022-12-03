@@ -24,4 +24,16 @@ public enum FunctionCommand {
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE));
     }
+
+    public boolean isMatching() {
+        return this == PAIRMATCHING;
+    }
+
+    public boolean isSearch() {
+        return this == PAIR_SEARCHING;
+    }
+
+    public boolean isReset() {
+        return this == PAIR_INITIALIZING;
+    }
 }
