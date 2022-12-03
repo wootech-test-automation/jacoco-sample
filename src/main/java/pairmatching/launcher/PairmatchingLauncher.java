@@ -24,6 +24,7 @@ public class PairmatchingLauncher {
             } catch (IllegalArgumentException exception) {
                 outputView.printError(exception.getMessage());
             } catch (IllegalStateException exception) {
+                outputView.printError(exception.getMessage());
                 pairmatchingStatus = new QuitStatus();
             }
         }
