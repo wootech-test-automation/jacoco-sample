@@ -18,7 +18,8 @@ public enum Level {
     }
 
     public static Level of(final String input) {
-        return Arrays.stream(values()).filter(level -> level.name.equals(input))
+        var findInput = input.replaceAll(" ", "");
+        return Arrays.stream(values()).filter(level -> level.name.equals(findInput))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format(ERROR_MESSAGE, input)));
     }
