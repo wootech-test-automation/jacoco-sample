@@ -43,7 +43,7 @@ public class InputView {
     }
 
     private PairOption getPairOption(String input) {
-        List<String> commands = List.of(input.split(","));
+        List<String> commands = List.of(input.split(", "));
         CourseCommand course = CourseCommand.of(commands.get(0));
         LevelCommand level = LevelCommand.of(commands.get(1));
         MissionCommand mission = MissionCommand.from(commands.get(2), level.command);
