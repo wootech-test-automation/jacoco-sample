@@ -21,7 +21,9 @@ public enum Subject {
     }
 
     public static Subject of(String input) {
-        return Arrays.stream(values()).filter(subject -> subject.name.equals(input))
+        var findInput = input.replaceAll(" ", "");
+
+        return Arrays.stream(values()).filter(subject -> subject.name.equals(findInput))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format(ERROR_MESSAGE, input)));
     }
