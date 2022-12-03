@@ -32,4 +32,8 @@ public class PairMatchingService {
         pairMatchingRepository.save(pairOption, pairs);
         return pairs;
     }
+
+    public List<Pair> getPairResult(PairOption pairOption) {
+        return pairMatchingRepository.findPairResult(pairOption);
+    }
 }
