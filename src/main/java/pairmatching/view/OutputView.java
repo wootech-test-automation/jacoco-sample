@@ -10,6 +10,10 @@ public class OutputView {
         pairs.forEach(this::printPairNames);
     }
 
+    public void printResetMessage() {
+        System.out.println("초기화 되었습니다.");
+    }
+
     private void printPairNames(Pair pair) {
         List<String> names = pair.getNames();
         System.out.println(String.join(" : ",names));
