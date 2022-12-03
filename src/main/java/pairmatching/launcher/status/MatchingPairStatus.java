@@ -8,15 +8,30 @@ import pairmatching.view.OutputView;
 public class MatchingPairStatus implements PairmatchingStatus {
     @Override
     public PairmatchingStatus next(Context pairmatchingContext, InputView inputView, OutputView outputView) {
-        var pairMatchingSelector = inputView.readPairMatchingSelector();
+        if (pairmatchingContext.matchCount() > 3) {
+            throw new IllegalStateException("페어를 매칭할  수 없습니다.");
+        }
+
+        pairmatchingContext.plusMatchCount();
+        
+        return process(pairmatchingContext, inputView, outputView);
+
+    }
+
+    private PairmatchingStatus process(Context pairmatchingContext, InputView inputView, OutputView outputView) {
         try {
-            outputView.printMatchingResult(pairmatchingContext.matchPair(pairMatchingSelector));
+            outputView.printMatchingResult(pairmatchingContext.matchPair());
+            return new SelectFunctionStatus();
         } catch (IllegalArgumentException stateException) {
-            if (inputView.readReEnter().isRetry()) {
-                return this;
-            }
-        } catch (IllegalStateException stateException) {
-            return new MatchingFailStatus();
+            return requestReEnter(inputView);
+        } catch (IllegalStateException exception) {
+            return new MatchingPairStatus();
+        }
+    }
+
+    private PairmatchingStatus requestReEnter(InputView inputView) {
+        if (inputView.readReEnter().isRetry()) {
+            return this;
         }
         return new SelectFunctionStatus();
     }
