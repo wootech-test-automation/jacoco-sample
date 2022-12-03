@@ -17,10 +17,17 @@ public class MatchingResult {
     }
 
     private List<MatchedCrew> matchPair(PairMatchingSelector pairMatchingSelector, List<Crew> shuffleCrew) {
+        validateCrewLength(shuffleCrew);
         List<MatchedCrew> matched = getMatchedCrews(shuffleCrew);
         this.validateIsMatching(matched);
         this.matchingResult.put(pairMatchingSelector, matched);
         return matched;
+    }
+
+    private void validateCrewLength(List<Crew> shuffleCrew) {
+        if (shuffleCrew.size() < 2) {
+            throw new IllegalStateException("매칭 할 수 없습니다");
+        }
     }
 
     private List<MatchedCrew> getMatchedCrews(List<Crew> shuffleCrew) {
