@@ -1,6 +1,9 @@
 package pairmatching.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import pairmatching.domain.command.FunctionCommand;
 import pairmatching.domain.command.RematchingCommand;
 
@@ -16,7 +19,7 @@ public class InputView {
         return FunctionCommand.of(Console.readLine());
     }
 
-    public String selectSpecificPairOption() {
+    public Map<String, Object> selectSpecificPairOption() {
         System.out.println("#############################################");
         System.out.println("과정: 백엔드 | 프론트엔드");
         System.out.println("미션:");
@@ -28,7 +31,16 @@ public class InputView {
         System.out.println("#############################################");
         System.out.println("과정, 레벨, 미션을 선택하세요.");
 
-        return Console.readLine();
+        return getCommands(Console.readLine());
+    }
+
+    private Map<String, Object> getCommands(String input) {
+        Map<String, Object> result = new HashMap<>();
+        List<String> commands = List.of(input.split(","));
+        result.put("course", commands.get(0));
+        result.put("level", commands.get(1));
+        result.put("mission", commands.get(2));
+        return result;
     }
 
     public RematchingCommand selectWhetherToReMatching() {
