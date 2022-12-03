@@ -13,7 +13,7 @@ public class MatchingPairStatus implements PairmatchingStatus {
         }
 
         pairmatchingContext.plusMatchCount();
-        
+
         return process(pairmatchingContext, inputView, outputView);
 
     }
@@ -31,7 +31,7 @@ public class MatchingPairStatus implements PairmatchingStatus {
 
     private PairmatchingStatus requestReEnter(InputView inputView) {
         if (inputView.readReEnter().isRetry()) {
-            return this;
+            return new SetMatchingPairStatus();
         }
         return new SelectFunctionStatus();
     }

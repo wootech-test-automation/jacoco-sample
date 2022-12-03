@@ -1,5 +1,6 @@
 package pairmatching.domain.info;
 
+import java.util.Objects;
 import pairmatching.domain.code.Course;
 import pairmatching.domain.code.Level;
 import pairmatching.domain.code.Subject;
@@ -33,6 +34,23 @@ public class PairMatchingSelector {
 
     public boolean isBackend() {
         return course.isBackend();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        PairMatchingSelector that = (PairMatchingSelector) o;
+        return level == that.level && getCourse() == that.getCourse() && subject == that.subject;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(level, getCourse(), subject);
     }
 
     public boolean isSameLevel(PairMatchingSelector pairMatchingSelector) {

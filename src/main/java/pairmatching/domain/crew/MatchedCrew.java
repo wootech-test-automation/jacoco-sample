@@ -3,6 +3,7 @@ package pairmatching.domain.crew;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,5 +33,22 @@ public class MatchedCrew {
         return "MatchedCrew{" +
                 "matchedCrew=" + matchedCrew +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MatchedCrew that = (MatchedCrew) o;
+        return Objects.equals(matchedCrew, that.matchedCrew);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matchedCrew);
     }
 }

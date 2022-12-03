@@ -13,7 +13,7 @@ public class Context {
 
     public String matchPair() {
         if (matchingResult.findBeforeMatchingResult(pairMatchingSelector)) {
-            throw new IllegalStateException("매칭 정보가 이미 존재합니다");
+            throw new IllegalArgumentException("매칭 정보가 이미 존재합니다");
         }
         return matchedCrewToResult(matchingResult.addMatching(pairMatchingSelector));
     }
