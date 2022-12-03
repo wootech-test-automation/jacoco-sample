@@ -1,6 +1,7 @@
 package pairmatching.view;
 
 import java.util.Map;
+import pairmatching.domain.PairOption;
 import pairmatching.domain.command.FunctionCommand;
 import pairmatching.domain.command.RematchingCommand;
 
@@ -26,7 +27,7 @@ public class InputViewProxy extends InputView{
     }
 
     @Override
-    public Map<String, Object> selectSpecificPairOption() {
+    public PairOption selectSpecificPairOption() {
         try {
             return inputView.selectSpecificPairOption();
         } catch (IllegalArgumentException exception) {
