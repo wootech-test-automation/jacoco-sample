@@ -7,7 +7,7 @@ import pairmatching.domain.crew.MatchingResult;
 import pairmatching.domain.info.PairMatchingSelector;
 
 public class Context {
-    private final MatchingResult matchingResult = new MatchingResult();
+    private MatchingResult matchingResult = new MatchingResult();
 
     public String matchPair(PairMatchingSelector pairMatchingSelector) {
         return matchedCrewToResult(matchingResult.addMatching(pairMatchingSelector));
@@ -21,5 +21,9 @@ public class Context {
         return matchedCrew.stream()
                 .map(MatchedCrew::result)
                 .collect(Collectors.joining("\n"));
+    }
+
+    public void resetMatchedPair() {
+        this.matchingResult = new MatchingResult();
     }
 }
