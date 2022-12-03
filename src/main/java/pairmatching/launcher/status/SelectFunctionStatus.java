@@ -8,6 +8,7 @@ import pairmatching.view.OutputView;
 public class SelectFunctionStatus implements PairmatchingStatus {
     @Override
     public PairmatchingStatus next(Context pairmatchingContext, InputView inputView, OutputView outputView) {
+        pairmatchingContext.resetMatchCount();
         var command = inputView.readPairMatchingServiceCommand();
 
         if (command.isMatching()) {
@@ -16,7 +17,10 @@ public class SelectFunctionStatus implements PairmatchingStatus {
         if (command.isSearch()) {
             return new PairSearchStatus();
         }
-        return null;
+        if (command.isReset()) {
+            return new MatchedResultResetStatus();
+        }
+        return new QuitStatus();
     }
 
     @Override
