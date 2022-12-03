@@ -1,11 +1,12 @@
 package pairmatching.domain;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PairMatchingRepository {
 
-    private Map<PairOption, List<Pair>> localDb;
+    private final Map<PairOption, List<Pair>> localDb = new HashMap<>();
 
     public void save(PairOption pairOption, List<Pair> pairs) {
         localDb.put(pairOption, pairs);
