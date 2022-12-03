@@ -15,8 +15,8 @@ public class PairMatchingSelector {
         var inputStr = input.split(",");
         validateInputSize(inputStr.length);
 
-        this.level = Level.of(inputStr[0]);
-        this.course = Course.of(inputStr[1]);
+        this.course = Course.of(inputStr[0]);
+        this.level = Level.of(inputStr[1]);
         this.subject = Subject.of(inputStr[2]);
     }
 
@@ -24,5 +24,18 @@ public class PairMatchingSelector {
         if (size != 3) {
             throw new IllegalArgumentException(String.format(ERROR_MESSAGE, size));
         }
+    }
+
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public boolean isBackend() {
+        return course.isBackend();
+    }
+
+    public boolean isSameLevel(PairMatchingSelector pairMatchingSelector) {
+        return this.course.equals(pairMatchingSelector.course);
     }
 }
