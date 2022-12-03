@@ -2,6 +2,7 @@ package pairmatching.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import pairmatching.domain.command.FunctionCommand;
+import pairmatching.domain.command.RematchingCommand;
 
 public class InputView {
 
@@ -30,9 +31,9 @@ public class InputView {
         return Console.readLine();
     }
 
-    public String selectWhetherToReMatching() {
+    public RematchingCommand selectWhetherToReMatching() {
         System.out.println("매칭 정보가 있습니다. 다시 매칭하시겠습니까?");
         System.out.println("네 | 아니오");
-        return Console.readLine();
+        return RematchingCommand.of(Console.readLine());
     }
 }
