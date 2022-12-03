@@ -4,6 +4,7 @@ import pairmatching.domain.command.CourseCommand;
 import pairmatching.domain.command.LevelCommand;
 import pairmatching.domain.command.MissionCommand;
 
+//TODO Eqauls 기능 오버라이드 필요
 public class PairOption {
 
     private final CourseCommand course;
