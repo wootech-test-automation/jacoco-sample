@@ -18,6 +18,10 @@ public class PairOption {
         this.mission = mission;
     }
 
+    public String sendPath() {
+        return course.getPath();
+    }
+
     public boolean isSameOption(PairOption other) {
         if (!course.command.equals(other.course.command)) {
             return false;
