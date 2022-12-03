@@ -33,8 +33,8 @@ public enum MissionCommand {
 
     private static void validateLevel(String level, MissionCommand missionCommand) {
         if (!missionCommand.level.equals(level)) {
-            throw new IllegalArgumentException("미션의 레벨과 입력한 레벨이 일치하지 않습니다. 입력값 : " + level +
-                    ", 미션 레벨 : " + missionCommand.command);
+            throw new IllegalArgumentException("미션의 레벨과 입력한 레벨이 일치하지 않습니다. 입력한 미션 레벨 : " + level +
+                    ", 해당 미션의 레벨 : " + missionCommand.level);
         }
     }
 
