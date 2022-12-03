@@ -7,10 +7,11 @@ import pairmatching.domain.crew.MatchingResult;
 import pairmatching.domain.info.PairMatchingSelector;
 
 public class Context {
-    int count = 1;
+    private int count = 1;
     private MatchingResult matchingResult = new MatchingResult();
+    private PairMatchingSelector pairMatchingSelector;
 
-    public String matchPair(PairMatchingSelector pairMatchingSelector) {
+    public String matchPair() {
         if (matchingResult.findBeforeMatchingResult(pairMatchingSelector)) {
             throw new IllegalStateException("매칭 정보가 이미 존재합니다");
         }
@@ -37,5 +38,13 @@ public class Context {
 
     public void resetMatchCount() {
         this.count = 1;
+    }
+
+    public int matchCount() {
+        return count;
+    }
+
+    public void generate(PairMatchingSelector readPairMatchingSelector) {
+        this.pairMatchingSelector = readPairMatchingSelector;
     }
 }
