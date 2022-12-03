@@ -3,22 +3,22 @@ package pairmatching.view;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 import pairmatching.domain.PairOption;
-import pairmatching.domain.command.CourseCommand;
-import pairmatching.domain.command.FunctionCommand;
-import pairmatching.domain.command.LevelCommand;
-import pairmatching.domain.command.MissionCommand;
-import pairmatching.domain.command.RematchingCommand;
+import pairmatching.domain.command.Course;
+import pairmatching.domain.command.Function;
+import pairmatching.domain.command.Level;
+import pairmatching.domain.command.Mission;
+import pairmatching.domain.command.Rematching;
 
 public class InputView {
 
-    public FunctionCommand selectProgramFunction() {
+    public Function selectProgramFunction() {
         System.out.println("기능을 선택하세요.");
         System.out.println("1. 페어 매칭");
         System.out.println("2. 페어 조회");
         System.out.println("3. 페어 초기화");
         System.out.println("Q. 종료");
 
-        return FunctionCommand.of(Console.readLine());
+        return Function.of(Console.readLine());
     }
 
     public PairOption selectSpecificPairOption() {
@@ -36,17 +36,17 @@ public class InputView {
         return getPairOption(Console.readLine());
     }
 
-    public RematchingCommand selectWhetherToReMatching() {
+    public Rematching selectWhetherToReMatching() {
         System.out.println("매칭 정보가 있습니다. 다시 매칭하시겠습니까?");
         System.out.println("네 | 아니오");
-        return RematchingCommand.of(Console.readLine());
+        return Rematching.of(Console.readLine());
     }
 
     private PairOption getPairOption(String input) {
         List<String> commands = List.of(input.split(", "));
-        CourseCommand course = CourseCommand.of(commands.get(0));
-        LevelCommand level = LevelCommand.of(commands.get(1));
-        MissionCommand mission = MissionCommand.from(commands.get(2), level.command);
+        Course course = Course.of(commands.get(0));
+        Level level = Level.of(commands.get(1));
+        Mission mission = Mission.from(commands.get(2), level.command);
         return new PairOption(course, level, mission);
     }
 }

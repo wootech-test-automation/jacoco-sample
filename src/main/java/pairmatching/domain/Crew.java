@@ -1,18 +1,18 @@
 package pairmatching.domain;
 
-import pairmatching.domain.command.CourseCommand;
+import pairmatching.domain.command.Course;
 
 public class Crew {
 
-    private CourseCommand courseCommand;
+    private Course courseCommand;
     private String name;
 
-    public Crew(CourseCommand courseCommand, String name) {
+    public Crew(Course courseCommand, String name) {
         this.courseCommand = courseCommand;
         this.name = name;
     }
 
-    public CourseCommand getCourseCommand() {
+    public Course getCourseCommand() {
         return courseCommand;
     }
 

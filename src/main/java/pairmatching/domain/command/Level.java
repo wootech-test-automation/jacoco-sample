@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import pairmatching.utils.ValueChecker;
 
-public enum LevelCommand {
+public enum Level {
     LEVEL1("레벨1"),
     LEVEL2("레벨2"),
     LEVEL3("레벨3"),
@@ -17,21 +17,21 @@ public enum LevelCommand {
     public String command;
 
     static List<String> addRightValues() {
-        return Arrays.stream(LevelCommand.values())
-                .map(command -> command.command)
+        return Arrays.stream(Level.values())
+                .map(level -> level.command)
                 .collect(Collectors.toList());
     }
 
 
-    public static LevelCommand of(String message) {
+    public static Level of(String message) {
         valueChecker.validate(message);
-        return Arrays.stream(LevelCommand.values())
-                .filter(levelCommand -> levelCommand.command.equals(message))
+        return Arrays.stream(Level.values())
+                .filter(level -> level.command.equals(message))
                 .findFirst()
                 .get();
     }
 
-    LevelCommand(String command) {
+    Level(String command) {
         this.command = command;
     }
 }

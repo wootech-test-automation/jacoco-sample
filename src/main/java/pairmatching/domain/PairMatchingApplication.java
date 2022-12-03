@@ -1,8 +1,8 @@
 package pairmatching.domain;
 
 import java.util.List;
-import pairmatching.domain.command.FunctionCommand;
-import pairmatching.domain.command.RematchingCommand;
+import pairmatching.domain.command.Function;
+import pairmatching.domain.command.Rematching;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 
@@ -20,13 +20,13 @@ public class PairMatchingApplication {
     }
 
     public void run() {
-        FunctionCommand functionCommand = startLogic(sendFunctionCommand());
+        Function functionCommand = startLogic(sendFunctionCommand());
         if (isNotQuit(functionCommand)) {
             run();
         }
     }
 
-    private FunctionCommand startLogic(FunctionCommand functionCommand) {
+    private Function startLogic(Function functionCommand) {
         if (isPairMatching(functionCommand)) {
             return pairMatching(functionCommand);
         }
@@ -39,10 +39,10 @@ public class PairMatchingApplication {
         return functionCommand;
     }
 
-    private FunctionCommand pairMatching(FunctionCommand functionCommand) {
+    private Function pairMatching(Function functionCommand) {
         PairOption pairOption = sendPairOption();
         if (hasPairMatchingResult(pairOption)) {
-            RematchingCommand rematchingCommand = sendWhetherToReMatching();
+            Rematching rematchingCommand = sendWhetherToReMatching();
             if (isNotRematching(rematchingCommand)) {
                 return pairMatching(functionCommand);
             }
@@ -53,53 +53,53 @@ public class PairMatchingApplication {
         return functionCommand;
     }
 
-    private FunctionCommand pairSearch(FunctionCommand functionCommand) {
+    private Function pairSearch(Function functionCommand) {
         PairOption pairOption = sendPairOption();
         List<Pair> pairResult = pairMatchingService.getPairResult(pairOption);
         outputView.printPairMatchingResult(pairResult);
         return functionCommand;
     }
 
-    private FunctionCommand pairReset(FunctionCommand functionCommand) {
+    private Function pairReset(Function functionCommand) {
         pairMatchingService.resetMatchResult();
         outputView.printResetMessage();
         return functionCommand;
     }
 
 
-    private RematchingCommand sendWhetherToReMatching() {
+    private Rematching sendWhetherToReMatching() {
         return inputView.selectWhetherToReMatching();
     }
 
-    private boolean isNotQuit(FunctionCommand functionCommand) {
-        return !functionCommand.equals(FunctionCommand.QUIT);
+    private boolean isNotQuit(Function functionCommand) {
+        return !functionCommand.equals(Function.QUIT);
     }
 
     private boolean hasPairMatchingResult(PairOption pairOption) {
         return pairMatchingService.hasMatchResult(pairOption);
     }
 
-    private FunctionCommand sendFunctionCommand() {
+    private Function sendFunctionCommand() {
         return inputView.selectProgramFunction();
     }
 
-    private boolean isNotRematching(RematchingCommand rematchingCommand) {
-        return rematchingCommand.equals(RematchingCommand.CANCEL);
+    private boolean isNotRematching(Rematching rematchingCommand) {
+        return rematchingCommand.equals(Rematching.CANCEL);
     }
 
     private PairOption sendPairOption() {
         return inputView.selectSpecificPairOption();
     }
 
-    private boolean isPairMatching(FunctionCommand functionCommand) {
-        return functionCommand.equals(FunctionCommand.PAIR_MATCH);
+    private boolean isPairMatching(Function functionCommand) {
+        return functionCommand.equals(Function.PAIR_MATCH);
     }
 
-    private boolean isPairSearch(FunctionCommand functionCommand) {
-        return functionCommand.equals(FunctionCommand.PAIR_SEARCH);
+    private boolean isPairSearch(Function functionCommand) {
+        return functionCommand.equals(Function.PAIR_SEARCH);
     }
 
-    private boolean isPairReset(FunctionCommand functionCommand) {
-        return functionCommand.equals(FunctionCommand.PAIR_RESET);
+    private boolean isPairReset(Function functionCommand) {
+        return functionCommand.equals(Function.PAIR_RESET);
     }
 }

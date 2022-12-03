@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import pairmatching.utils.ValueChecker;
 
-public enum CourseCommand {
+public enum Course {
 
     BACKEND("백엔드", "/backend-crew.md"),
     FRONTEND("프론트엔드", "/frontend-crew.md");
@@ -16,21 +16,21 @@ public enum CourseCommand {
     public String path;
 
     static List<String> addRightValues() {
-        return Arrays.stream(CourseCommand.values())
-                .map(command -> command.command)
+        return Arrays.stream(Course.values())
+                .map(course -> course.command)
                 .collect(Collectors.toList());
     }
 
 
-    public static CourseCommand of(String message) {
+    public static Course of(String message) {
         valueChecker.validate(message);
-        return Arrays.stream(CourseCommand.values())
-                .filter(courseCommand -> courseCommand.command.equals(message))
+        return Arrays.stream(Course.values())
+                .filter(course -> course.command.equals(message))
                 .findFirst()
                 .get();
     }
 
-    CourseCommand(String name, String path) {
+    Course(String name, String path) {
         this.command = name;
         this.path = path;
     }

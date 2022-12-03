@@ -1,9 +1,8 @@
 package pairmatching.view;
 
-import java.util.Map;
 import pairmatching.domain.PairOption;
-import pairmatching.domain.command.FunctionCommand;
-import pairmatching.domain.command.RematchingCommand;
+import pairmatching.domain.command.Function;
+import pairmatching.domain.command.Rematching;
 
 /**
  * 에러시 입력값을 다시 받도록 해주는 클래스
@@ -17,7 +16,7 @@ public class InputViewProxy extends InputView{
     }
 
     @Override
-    public FunctionCommand selectProgramFunction() {
+    public Function selectProgramFunction() {
         try {
             return inputView.selectProgramFunction();
         } catch (IllegalArgumentException exception) {
@@ -37,7 +36,7 @@ public class InputViewProxy extends InputView{
     }
 
     @Override
-    public RematchingCommand selectWhetherToReMatching() {
+    public Rematching selectWhetherToReMatching() {
         try {
             return inputView.selectWhetherToReMatching();
         } catch (IllegalArgumentException exception) {
