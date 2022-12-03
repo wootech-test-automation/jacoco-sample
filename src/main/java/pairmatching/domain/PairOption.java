@@ -25,20 +25,4 @@ public class PairOption {
     public CourseCommand getCourse() {
         return course;
     }
-
-    public boolean isSameOption(PairOption other) {
-        if (!course.command.equals(other.course.command)) {
-            return false;
-        }
-        if (!level.command.equals(other.level.command)) {
-            return false;
-        }
-
-        if (!mission.command.equals(other.mission.command)) {
-            return false;
-        }
-
-        return true;
-    }
-
 }
