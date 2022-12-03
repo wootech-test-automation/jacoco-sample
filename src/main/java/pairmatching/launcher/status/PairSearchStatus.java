@@ -9,8 +9,10 @@ public class PairSearchStatus implements PairmatchingStatus {
     @Override
     public PairmatchingStatus next(Context pairmatchingContext, InputView inputView, OutputView outputView) {
         var result = pairmatchingContext.searchPair(inputView.readPairMatchingSelector());
+        
         outputView.printMatchingResult(result);
-        return null;
+
+        return new SelectFunctionStatus();
     }
 
     @Override
