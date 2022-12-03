@@ -23,13 +23,22 @@ public enum Course {
     }
 
     public static Course of(final String input) {
-        return Arrays.stream(values()).filter(course -> course.name.equals(input))
+        var findInput = input.replaceAll(" ", "");
+        return Arrays.stream(values()).filter(course -> course.name.equals(findInput))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(ERROR_DID_NOT_EXISTS_COURSE, input)));
+                .orElseThrow(() -> new IllegalArgumentException(String.format(ERROR_MESSAGE_FORMAT, input)));
     }
     // 추가 기능 구현
 
     private String getName() {
         return name;
+    }
+
+    public boolean isBackend() {
+        return this == BACKEND;
+    }
+
+    public boolean isFrontend() {
+        return this == FRONTEND;
     }
 }
