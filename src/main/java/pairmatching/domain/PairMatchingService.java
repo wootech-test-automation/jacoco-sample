@@ -36,4 +36,8 @@ public class PairMatchingService {
     public List<Pair> getPairResult(PairOption pairOption) {
         return pairMatchingRepository.findPairResult(pairOption);
     }
+
+    public void resetMatchResult() {
+        pairMatchingRepository.reset();
+    }
 }

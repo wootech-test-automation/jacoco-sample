@@ -22,4 +22,8 @@ public class PairMatchingRepository {
         }
         return false;
     }
+
+    public void reset() {
+        localDb.clear();
+    }
 }
