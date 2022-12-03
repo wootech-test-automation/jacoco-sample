@@ -10,7 +10,6 @@ public class CodeTest {
     @Test
     void parameterTest() {
         // given
-        // given
 
         // 메서드(public) 5개까지 제한
         // 필드(클래스, 인스턴스 포함) 4개 제한
