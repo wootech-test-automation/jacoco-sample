@@ -9,11 +9,12 @@ public class MatchedResultResetStatus implements PairmatchingStatus {
     @Override
     public PairmatchingStatus next(Context pairmatchingContext, InputView inputView, OutputView outputView) {
         pairmatchingContext.resetMatchedPair();
+        outputView.printReset();
         return new SelectFunctionStatus();
     }
 
     @Override
     public boolean runnable() {
-        return false;
+        return true;
     }
 }
