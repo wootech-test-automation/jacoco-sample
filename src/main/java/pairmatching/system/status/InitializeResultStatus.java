@@ -16,6 +16,6 @@ public class InitializeResultStatus implements PairmatchingStatus {
 
     @Override
     public boolean runnable() {
-        return false;
+        return true;
     }
 }
