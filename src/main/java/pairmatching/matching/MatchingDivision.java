@@ -1,6 +1,7 @@
 package pairmatching.matching;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import pairmatching.code.Course;
 import pairmatching.code.InputCommand;
@@ -26,6 +27,10 @@ public class MatchingDivision implements InputCommand {
         Mission.validateExistsSubjectInLevel(level, subject);
     }
 
+    public boolean isSameLevel(MatchingDivision matchingDivision) {
+        return level.equals(matchingDivision.level);
+    }
+
     private void validateInputSize(String[] result) {
         if (result.length != 3) {
             throw new IllegalArgumentException(ERROR_MESSAGE + result.length);
@@ -37,5 +42,22 @@ public class MatchingDivision implements InputCommand {
                 .stream()
                 .map(name -> new Crew(course, name))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MatchingDivision that = (MatchingDivision) o;
+        return course == that.course && level == that.level && subject == that.subject;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(course, level, subject);
     }
 }
