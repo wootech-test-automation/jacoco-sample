@@ -1,7 +1,6 @@
 package pairmatching.matching;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +39,14 @@ public class MatchedCrews {
                 .collect(Collectors.joining("\n"));
     }
 
-    private List<Crew> convertCrewsToCrewList(final Crew... crews) {
-        return Arrays.stream(crews).collect(Collectors.toList());
+    public boolean isBeforeMatchingCrews(MatchedCrews targetMatchedCrews) {
+        return this.matchedCrewList.stream()
+                .anyMatch(matchedCrew -> isBeforeMatchingCrew(targetMatchedCrews, matchedCrew));
+    }
+
+    private boolean isBeforeMatchingCrew(MatchedCrews targetMatchedCrews, MatchedCrew matchedCrew) {
+        return targetMatchedCrews.matchedCrewList
+                .stream()
+                .anyMatch(matchedCrew::isBeforeMatchingCrews);
     }
 }
