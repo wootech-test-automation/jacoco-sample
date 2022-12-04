@@ -40,4 +40,9 @@ public class PairmatchingContextImpl implements PairmatchingContext {
     public void initializeMatchingResult() {
         this.matchingResult = new MatchingResult();
     }
+
+    @Override
+    public void plusRetryCount() {
+        this.repeatMatchingCount = repeatMatchingCount.plusCount();
+    }
 }

@@ -8,11 +8,14 @@ public class RetryProcessMatchingPairStatus implements PairmatchingStatus {
     @Override
     public PairmatchingStatus next(PairmatchingContext pairmatchingContext, InputView inputView,
                                    OutputView outputView) {
+
         var command = inputView.readRetryCommand();
-        System.out.println(command.isRetry());
+
         if (command.isRetry()) {
+            pairmatchingContext.plusRetryCount();
             return new MatchingPairStatus();
         }
+
         return new ExitStatus();
     }
 

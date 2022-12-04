@@ -14,4 +14,6 @@ public interface PairmatchingContext {
     String selectMatching();
 
     void initializeMatchingResult();
+
+    void plusRetryCount();
 }
