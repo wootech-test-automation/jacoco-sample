@@ -11,6 +11,9 @@ public class MatchedCrew {
 
     public MatchedCrew(List<Crew> shuffledCrew) {
         this.matchedCrew = new LinkedHashSet<>(shuffledCrew);
+        if (this.matchedCrew.size() != shuffledCrew.size()) {
+            throw new IllegalStateException("파일내 중복된 크루가 존재합니다");
+        }
     }
 
 
