@@ -8,12 +8,19 @@ public class MatchingResult {
     private final Map<MatchingDivision, MatchedCrews> matchingResult = new HashMap<>();
 
     public void matchPair(MatchingDivision matchingDivision, List<Crew> crews) {
+        validateMatchingCrewSize(crews.size());
         validateBeforeMatchingCrew(matchingDivision);
 
         var matchedCrews = new MatchedCrews(crews);
 
         this.validateSameMatchingCrew(matchingDivision, matchedCrews);
         this.matchingResult.put(matchingDivision, matchedCrews);
+    }
+
+    private void validateMatchingCrewSize(int size) {
+        if (size < 2) {
+            throw new IllegalStateException("페어를 매칭하는 최소인원은 2명입니다.");
+        }
     }
 
     private void validateBeforeMatchingCrew(MatchingDivision matchingDivision) {
@@ -33,6 +40,9 @@ public class MatchingResult {
     }
 
     public String findMatchingPair(MatchingDivision matchingDivision) {
-        return this.matchingResult.get(matchingDivision).result();
+        if (this.matchingResult.containsKey(matchingDivision)) {
+            return this.matchingResult.get(matchingDivision).result();
+        }
+        throw new IllegalArgumentException("매칭된 페어가 없습니다");
     }
 }
