@@ -1,5 +1,6 @@
 package pairmatching.system;
 
+import pairmatching.system.status.ExitStatus;
 import pairmatching.system.status.InitStatus;
 import pairmatching.system.status.PairmatchingStatus;
 import pairmatching.view.InputView;
@@ -22,7 +23,14 @@ public class PairmatchingLauncher {
 
     public void execute() {
         while (pairmatchingStatus.runnable()) {
-            pairmatchingStatus = pairmatchingStatus.next(pairmatchingContext, inputView, outputView);
+            try {
+                pairmatchingStatus = pairmatchingStatus.next(pairmatchingContext, inputView, outputView);
+            } catch (IllegalStateException exception) {
+                outputView.printError(exception);
+                pairmatchingStatus = new ExitStatus();
+            } catch (IllegalArgumentException exception) {
+                outputView.printError(exception);
+            }
         }
 
     }
