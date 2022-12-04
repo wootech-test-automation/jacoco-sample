@@ -38,4 +38,12 @@ public enum FeaturesCommandCode implements InputCommand {
     public boolean isMatching() {
         return this == MATCHING;
     }
+
+    public boolean isSelecting() {
+        return this == SELECT;
+    }
+
+    public boolean isResting() {
+        return this == INITIALIZE;
+    }
 }
