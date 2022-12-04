@@ -1,7 +1,7 @@
-package pairmatching.matching;
+package pairmatching.domain.matching;
 
 import java.util.Objects;
-import pairmatching.code.Course;
+import pairmatching.domain.code.Course;
 
 public class Crew {
     private final Course course;

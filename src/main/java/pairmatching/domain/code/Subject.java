@@ -1,4 +1,4 @@
-package pairmatching.code;
+package pairmatching.domain.code;
 
 import java.util.Arrays;
 
@@ -25,4 +25,7 @@ public enum Subject implements InputCommand {
                 .orElseThrow(() -> new IllegalArgumentException(String.format(ERROR_MESSAGE + input)));
     }
 
+    public String getName() {
+        return this.name;
+    }
 }

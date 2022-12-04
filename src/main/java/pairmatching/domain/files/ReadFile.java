@@ -1,4 +1,4 @@
-package pairmatching.files;
+package pairmatching.domain.files;
 
 import java.io.IOException;
 import java.nio.file.Files;

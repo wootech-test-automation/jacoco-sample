@@ -1,8 +1,9 @@
-package pairmatching.code;
+package pairmatching.domain.code;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Mission {
     /**
@@ -14,6 +15,7 @@ public enum Mission {
     STAGE4(Level.LEVEL4, List.of(Subject.IMPROVEMENT_PERFORMANCE, Subject.DEPLOY)),
     STAGE5(Level.LEVEL5);
 
+    public static final String MISSION_FORMAT = "  - %s: %s";
     private final Level level;
     private final List<Subject> subjects;
 
@@ -27,11 +29,23 @@ public enum Mission {
         this.subjects = new ArrayList<>();
     }
 
-    public static void valdiateExistsSubjectInLevel(Level level, Subject subject) {
+    public static void validateExistsSubjectInLevel(Level level, Subject subject) {
         var result = Arrays.stream(values()).filter(mission -> mission.level.equals(level))
                 .noneMatch(mission -> mission.subjects.contains(subject));
         if (result) {
             throw new IllegalArgumentException("해당 레벨에서 과정은 존재하지 않습니다.");
         }
+    }
+
+    public static String messages() {
+        return Arrays.stream(values()).map(Mission::message).collect(Collectors.joining("\n"));
+    }
+
+    private String message() {
+        return String.format(MISSION_FORMAT, level.getName(),
+                subjects.stream()
+                        .map(Subject::getName)
+                        .collect(Collectors.joining(" | "))
+        );
     }
 }

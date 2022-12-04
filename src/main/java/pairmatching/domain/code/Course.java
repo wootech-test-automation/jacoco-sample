@@ -1,10 +1,10 @@
-package pairmatching.code;
+package pairmatching.domain.code;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import pairmatching.files.ReadFile;
+import pairmatching.domain.files.ReadFile;
 
 public enum Course implements InputCommand {
     BACKEND("백엔드", "backend-crew.md"),

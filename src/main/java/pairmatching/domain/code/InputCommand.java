@@ -1,4 +1,4 @@
-package pairmatching.code;
+package pairmatching.domain.code;
 
 public interface InputCommand {
     String DID_NOT_EXISTS_CODE = "해당 명렁어 혹은 이름은 존재하지 않습니다.";

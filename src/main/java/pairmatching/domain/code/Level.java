@@ -1,4 +1,4 @@
-package pairmatching.code;
+package pairmatching.domain.code;
 
 import java.util.Arrays;
 
@@ -20,5 +20,9 @@ public enum Level implements InputCommand {
                 .filter(level -> level.name.equals(input.trim()))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format(ERROR_MESSAGE, input)));
+    }
+
+    public String getName() {
+        return name;
     }
 }

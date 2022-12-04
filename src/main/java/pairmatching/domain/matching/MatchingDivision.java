@@ -1,13 +1,13 @@
-package pairmatching.matching;
+package pairmatching.domain.matching;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import pairmatching.code.Course;
-import pairmatching.code.InputCommand;
-import pairmatching.code.Level;
-import pairmatching.code.Mission;
-import pairmatching.code.Subject;
+import pairmatching.domain.code.Course;
+import pairmatching.domain.code.InputCommand;
+import pairmatching.domain.code.Level;
+import pairmatching.domain.code.Mission;
+import pairmatching.domain.code.Subject;
 
 public class MatchingDivision implements InputCommand {
 

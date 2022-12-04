@@ -1,4 +1,4 @@
-package pairmatching.matching;
+package pairmatching.domain.matching;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,9 @@ public class MatchingResult {
 
     public void matchPair(MatchingDivision matchingDivision, List<Crew> crews) {
         validateBeforeMatchingCrew(matchingDivision);
+
         var matchedCrews = new MatchedCrews(crews);
+
         this.validateSameMatchingCrew(matchingDivision, matchedCrews);
         this.matchingResult.put(matchingDivision, matchedCrews);
     }
@@ -19,7 +21,7 @@ public class MatchingResult {
             throw new IllegalStateException("이미 기록이 존재합니다.");
         }
     }
-    
+
 
     private void validateSameMatchingCrew(MatchingDivision matchingDivision, MatchedCrews matchedCrews) {
         var result = matchingResult.entrySet().stream()
