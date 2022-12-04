@@ -1,6 +1,6 @@
 package pairmatching.system;
 
-import pairmatching.matching.MatchingDivision;
+import pairmatching.domain.matching.MatchingDivision;
 
 public interface PairmatchingContext {
 
@@ -8,5 +8,10 @@ public interface PairmatchingContext {
 
     String matchPair();
 
-    void retryMatching();
+
+    void initializeMatchingCount();
+
+    String selectMatching();
+
+    void initializeMatchingResult();
 }
