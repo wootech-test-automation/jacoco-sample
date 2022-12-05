@@ -11,6 +11,14 @@ public class Crew {
         this.name = name;
     }
 
+    public static Crew makeBackendCrew(String name) {
+        return new Crew(Course.BACKEND, new Name(name));
+    }
+
+    public static Crew makeFrontendCrew(String name) {
+        return new Crew(Course.FRONTEND, new Name(name));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -26,10 +34,6 @@ public class Crew {
     @Override
     public int hashCode() {
         return Objects.hash(course, name);
-    }
-
-    public Course getCourse() {
-        return course;
     }
 
     public Name getName() {
