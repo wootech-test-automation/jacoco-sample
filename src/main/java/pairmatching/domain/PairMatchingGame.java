@@ -1,43 +1,57 @@
 package pairmatching.domain;
 
 import java.util.List;
+import java.util.Set;
 import pairmatching.domain.checker.DefaultDuplicateChecker;
 import pairmatching.domain.checker.DuplicateChecker;
-import pairmatching.domain.db.PairDatabase;
+import pairmatching.db.Database;
 import pairmatching.domain.loader.CrewLoader;
 import pairmatching.domain.maker.EvenPairMaker;
 import pairmatching.domain.maker.OddPairMaker;
 import pairmatching.domain.maker.PairMaker;
-import pairmatching.domain.type.Course;
 import pairmatching.domain.type.Crew;
-import pairmatching.domain.type.Level;
-import pairmatching.domain.type.Mission;
+import pairmatching.domain.type.MatchingInformation;
 import pairmatching.domain.type.Pair;
+import pairmatching.exception.EmptyMatchedCrewException;
 
 public class PairMatchingGame {
 
-    private final PairDatabase database = new PairDatabase();
+    private final Database database = new Database();
     private final CrewLoader crewLoader = new CrewLoader();
     private final DuplicateChecker duplicateChecker = new DefaultDuplicateChecker(database);
 
-    public boolean isDuplicateRequest(Course course, Mission mission) {
-        return duplicateChecker.isDuplicate(course, mission);
+    public Set<Pair> pairMatch(MatchingInformation matchingInformation) {
+        duplicateChecker.checkDuplicate(matchingInformation);
+        List<Pair> pairs = makeCrewPairs(matchingInformation);
+        database.addAll(matchingInformation, pairs);
+        return database.getAll(matchingInformation);
     }
 
-    public void pairMatch(Course course, Level level, Mission mission) {
-        List<Crew> names = crewLoader.getNames(course);
-        PairMaker pairMaker = createPairMaker(names.size());
-        List<Pair> pairs = pairMaker.createPair(mission, names);
-        duplicateChecker.isDuplicatePair(level.toString(), pairs);
-        database.addAll(course, mission, pairs);
+    public Set<Pair> reMatch(MatchingInformation matchingInformation) {
+        database.removeKey(matchingInformation);
+        List<Pair> pairs = makeCrewPairs(matchingInformation);
+        database.addAll(matchingInformation, pairs);
+        return database.getAll(matchingInformation);
     }
 
-    public List<Pair> showPair(Course course, Mission mission) {
-        return database.getAll(course, mission);
+    public Set<Pair> showPair(MatchingInformation matchingInformation) {
+        Set<Pair> pairs = database.getAll(matchingInformation);
+        if (pairs.isEmpty()) {
+            throw new EmptyMatchedCrewException();
+        }
+        return pairs;
     }
 
-    public void initialize() {
+    public void reset() {
         database.clear();
+    }
+
+    private List<Pair> makeCrewPairs(MatchingInformation matchingInformation) {
+        List<Crew> names = crewLoader.getNames(matchingInformation.getCourse());
+        PairMaker pairMaker = createPairMaker(names.size());
+        List<Pair> pairs = pairMaker.createPair(names);
+        duplicateChecker.checkDuplicatePair(matchingInformation.getLevel().toString(), pairs);
+        return pairs;
     }
 
     private PairMaker createPairMaker(int number) {
