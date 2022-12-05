@@ -1,6 +1,9 @@
 package pairmatching.domain.type;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Pair {
     private final Crew first;
@@ -17,6 +20,19 @@ public class Pair {
         this.first = first;
         this.second = second;
         this.third = third;
+    }
+
+    public boolean match(Pair other) {
+        Set<Crew> existCrews = new HashSet<>(List.of(first, second));
+        if (third != null) {
+            existCrews.add(third);
+        }
+        Set<Crew> otherCrews = new HashSet<>(List.of(other.getFirst(), other.getSecond()));
+        if (other.getThird() != null) {
+            otherCrews.add(third);
+        }
+        existCrews.retainAll(otherCrews);
+        return existCrews.size() >= 2;
     }
 
     @Override
