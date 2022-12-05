@@ -30,13 +30,13 @@ public class CrewLoader {
         List<Name> names = nameLoader.loadNames(backendPath);
         List<String> temp = names.stream().map(Name::toString).collect(Collectors.toList());
         List<String> shuffles = Randoms.shuffle(temp);
-        return shuffles.stream().map(s -> new Crew(Course.BACKEND, new Name(s))).collect(Collectors.toList());
+        return shuffles.stream().map(Crew::makeBackendCrew).collect(Collectors.toList());
     }
 
     private List<Crew> makeFrontCrews() {
         List<Name> names = nameLoader.loadNames(frontendPath);
         List<String> temp = names.stream().map(Name::toString).collect(Collectors.toList());
         List<String> shuffles = Randoms.shuffle(temp);
-        return shuffles.stream().map(s -> new Crew(Course.FRONTEND, new Name(s))).collect(Collectors.toList());
+        return shuffles.stream().map(Crew::makeFrontendCrew).collect(Collectors.toList());
     }
 }
