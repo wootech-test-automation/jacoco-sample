@@ -24,8 +24,9 @@ public class Database {
 
     public boolean existPair(String inputKey, Pair data) {
         List<String> keys = findKeys(inputKey);
-        return keys.stream().map(memory::get)
-                .anyMatch(pairs -> matchPair(pairs, data));
+        return keys.stream()
+                .map(memory::get)
+                .anyMatch(pairs -> matchPairs(pairs, data));
     }
 
     public Set<Pair> getAll(MatchingInformation matchingInformation) {
@@ -50,8 +51,8 @@ public class Database {
                 .collect(Collectors.toList());
     }
 
-    private boolean matchPair(Set<Pair> pairs, Pair value) {
+    private boolean matchPairs(Set<Pair> pairs, Pair value) {
         return pairs.stream()
-                .anyMatch(pair -> pair.equals(value));
+                .anyMatch(pair -> pair.match(value));
     }
 }
