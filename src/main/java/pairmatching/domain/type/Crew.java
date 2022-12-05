@@ -36,6 +36,9 @@ public class Crew {
         return Objects.hash(course, name);
     }
 
+    public Course getCourse() {
+        return course;
+    }
     public Name getName() {
         return name;
     }
