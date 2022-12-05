@@ -19,4 +19,9 @@ public enum Course {
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_COURSE_NAME));
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
