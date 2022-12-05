@@ -1,26 +1,32 @@
 package pairmatching.domain.checker;
 
 import java.util.List;
-import pairmatching.domain.db.PairDatabase;
-import pairmatching.domain.type.Course;
-import pairmatching.domain.type.Mission;
+import pairmatching.db.Database;
+import pairmatching.domain.type.MatchingInformation;
 import pairmatching.domain.type.Pair;
+import pairmatching.exception.DuplicateException;
+import pairmatching.exception.DuplicatePairException;
 
 public class DefaultDuplicateChecker implements DuplicateChecker {
 
-    private final PairDatabase database;
+    private final Database database;
 
-    public DefaultDuplicateChecker(PairDatabase database) {
+    public DefaultDuplicateChecker(Database database) {
         this.database = database;
     }
 
     @Override
-    public boolean isDuplicate(Course course, Mission mission) {
-        return database.exist(course, mission);
+    public void checkDuplicate(MatchingInformation matchingInformation) {
+        if (database.exist(matchingInformation)) {
+           throw new DuplicateException();
+        }
     }
 
     @Override
-    public boolean isDuplicatePair(String inputKey, List<Pair> pairs) {
-        return pairs.stream().anyMatch(pair -> database.existPair(inputKey, pair));
+    public void checkDuplicatePair(String inputKey, List<Pair> pairs) {
+        boolean duplicatePair = pairs.stream().anyMatch(pair -> database.existPair(inputKey, pair));
+        if (duplicatePair) {
+            throw new DuplicatePairException();
+        }
     }
 }
