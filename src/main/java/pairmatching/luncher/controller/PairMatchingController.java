@@ -51,6 +51,7 @@ public class PairMatchingController {
 
     public void requestReset() {
         pairMatchingGame.reset();
+        outputView.reset();
     }
 
     public void printError(String message) {
