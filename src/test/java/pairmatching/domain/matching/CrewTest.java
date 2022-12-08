@@ -31,7 +31,7 @@ class CrewTest {
     @ValueSource(strings = {"가", "나"})
     void 크루의_이름이_같고_강좌가_다르면_다른_크루입니다(final String input) {
         var target = new Crew(Course.BACKEND, input);
-        var original = new Crew(Course.FRONTEND input);
+        var original = new Crew(Course.FRONTEND, input);
 
         Assertions.assertThat(original).isEqualTo(target);
     }
