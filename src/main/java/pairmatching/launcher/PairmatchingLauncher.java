@@ -12,7 +12,7 @@ public class PairmatchingLauncher {
     private final PairmatchingContext pairmatchingContext;
     private PairmatchingStatus pairmatchingStatus;
 
-    PairmatchingLauncher() {
+    public PairmatchingLauncher() {
         this.pairmatchingContext = new PairmatchingContextImpl(new PairmatchingView(new InputView(), new OutputView()));
         this.pairmatchingStatus = new InitStatus();
 
