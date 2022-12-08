@@ -13,7 +13,7 @@ class CourseTest {
     @ParameterizedTest
     @ValueSource(strings = {"풀스택", " ", ""})
     void 잘못된_입력을_할_경우_오류를_반환합니다(final String input) {
-
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Course.from(input));
     }
 
     @Test
