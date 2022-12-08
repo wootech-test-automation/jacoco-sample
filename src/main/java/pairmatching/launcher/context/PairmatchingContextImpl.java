@@ -23,4 +23,9 @@ public class PairmatchingContextImpl implements PairmatchingContext {
         this.matchingDivision = matchingDivision;
     }
 
+    @Override
+    public String matchPair() {
+        return null;
+    }
+
 }

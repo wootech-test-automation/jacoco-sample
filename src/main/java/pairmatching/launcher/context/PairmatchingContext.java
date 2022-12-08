@@ -9,4 +9,6 @@ public interface PairmatchingContext {
     PairmatchingView getPairmatchingView();
 
     void inputMatchingDivision(MatchingDivision matchingDivision);
+
+    String matchPair();
 }
