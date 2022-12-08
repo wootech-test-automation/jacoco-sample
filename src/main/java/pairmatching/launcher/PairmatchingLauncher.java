@@ -20,11 +20,12 @@ public class PairmatchingLauncher {
                 new PairmatchingView(new InputView(), new OutputView()),
                 new CrewGenerator(new ReadFileImpl(), new ShuffleGeneratorImpl())
         );
-        this.pairmatchingStatus = new InitStatus();
 
     }
 
     public void execute() {
+        this.pairmatchingStatus = new InitStatus();
+
         while (pairmatchingStatus.runnable()) {
             pairmatchingStatus = pairmatchingStatus.next(pairmatchingContext);
         }
