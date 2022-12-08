@@ -1,8 +1,10 @@
 package pairmatching.view;
 
-import java.util.NoSuchElementException;
-
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
+import pairmatching.domain.code.Course;
+import pairmatching.domain.code.Level;
+import pairmatching.domain.matching.MatchingDivision;
 import pairmatching.launcher.code.FeatureCommand;
 
 public class InputView extends IoPrinter {
@@ -13,8 +15,14 @@ public class InputView extends IoPrinter {
         return FeatureCommand.from(readLine());
     }
 
-    public String readPairmatchingDivision() {
-        return this.readLine();
+    public MatchingDivision readPairmatchingDivision() {
+        this.println(DIVISION_HASH);
+        this.println(String.format("과정 : %s", Course.messages()));
+        this.println(Level.messages());
+        this.println(DIVISION_HASH);
+        this.println("과정, 레벨, 미션을 선택하세요.");
+        this.println("ex) 백엔드, 레벨1, 자동차경주");
+        return new MatchingDivision(this.readLine());
     }
 
     private String readLine() {
