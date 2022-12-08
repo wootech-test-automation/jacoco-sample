@@ -33,7 +33,7 @@ class CrewTest {
         var target = new Crew(Course.BACKEND, input);
         var original = new Crew(Course.FRONTEND, input);
 
-        Assertions.assertThat(original).isEqualTo(target);
+        Assertions.assertThat(original).isNotEqualTo(target);
     }
 
 }
