@@ -1,5 +1,8 @@
 package pairmatching.launcher;
 
+import pairmatching.domain.generator.CrewGenerator;
+import pairmatching.domain.generator.ReadFileImpl;
+import pairmatching.domain.generator.ShuffleGeneratorImpl;
 import pairmatching.launcher.context.PairmatchingContext;
 import pairmatching.launcher.context.PairmatchingContextImpl;
 import pairmatching.launcher.status.InitStatus;
@@ -13,7 +16,10 @@ public class PairmatchingLauncher {
     private PairmatchingStatus pairmatchingStatus;
 
     public PairmatchingLauncher() {
-        this.pairmatchingContext = new PairmatchingContextImpl(new PairmatchingView(new InputView(), new OutputView()));
+        this.pairmatchingContext = new PairmatchingContextImpl(
+                new PairmatchingView(new InputView(), new OutputView()),
+                new CrewGenerator(new ReadFileImpl(), new ShuffleGeneratorImpl())
+        );
         this.pairmatchingStatus = new InitStatus();
 
     }
