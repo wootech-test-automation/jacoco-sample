@@ -26,7 +26,7 @@ public enum Level {
 
     public static Level from(final String name, final Subject subject) {
         return Arrays.stream(values())
-                .filter(level -> level.name.equals(name))
+                .filter(level -> level.name.equals(name.trim()))
                 .filter(level -> level.subjects.contains(subject))
                 .findAny()
                 .orElseThrow(IllegalArgumentException::new);
