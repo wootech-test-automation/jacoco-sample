@@ -1,32 +1,56 @@
 package pairmatching.domain.matching;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import pairmatching.exception.DuplicatedMatchingDivisionException;
+import pairmatching.exception.MatchingDivisionDidNotExists;
 
 public class MatchingResult {
-    private Map<MatchingDivision, MatchedCrews> matchingResult;
+    private final Map<MatchingDivision, MatchedCrews> matchingResult;
 
-    private static MatchedCrew generateMatchedCrew(Queue<Crew> crewsQueue) {
+    public MatchingResult() {
+        this.matchingResult = new HashMap<>();
+    }
+
+    public void matchPair(MatchingDivision matchingDivision, List<Crew> crews) {
+        validateDuplicatedKey(matchingDivision);
+
+        this.matchingResult.put(matchingDivision, generateMatchedCrews(new LinkedList<>(crews)));
+    }
+
+    private void validateDuplicatedKey(MatchingDivision matchingDivision) {
+        if (this.matchingResult.containsKey(matchingDivision)) {
+            throw new DuplicatedMatchingDivisionException();
+        }
+    }
+
+    private MatchedCrews generateMatchedCrews(LinkedList<Crew> crews) {
+        var matchedCrews = new MatchedCrews();
+
+        while (crews.size() > 3) {
+            matchedCrews.add(generateMatchedCrew(crews, 2));
+        }
+
+        matchedCrews.add(generateMatchedCrew(crews, crews.size()));
+
+        return matchedCrews;
+    }
+
+    private MatchedCrew generateMatchedCrew(Queue<Crew> crewQueue, final int size) {
         var matchedCrew = new MatchedCrew();
-        for (int i = 0; i <= 1; i++) {
-            matchedCrew.add(crewsQueue.poll());
+        for (int i = 0; i < size; i++) {
+            matchedCrew.add(crewQueue.poll());
         }
         return matchedCrew;
     }
 
-    public void matchPair(MatchingDivision matchingDivision, List<Crew> crews) {
-        var matchedCrews = new MatchedCrews();
-        Queue<Crew> crewsQueue = (Queue) crews;
-
-        while (crewsQueue.size() > 3) {
-            MatchedCrew matchedCrew = generateMatchedCrew(crewsQueue);
-            matchedCrews.add(matchedCrew);
+    public String findByMatchingDivision(MatchingDivision matchingDivision) {
+        if (!this.matchingResult.containsKey(matchingDivision)) {
+            throw new MatchingDivisionDidNotExists();
         }
-        var matchedCrew = new MatchedCrew();
-        while (!crewsQueue.isEmpty()) {
-            matchedCrew.add(crewsQueue.poll());
-        }
-        matchedCrews.add(matchedCrew);
+        return this.matchingResult.get(matchingDivision).result();
     }
 }
