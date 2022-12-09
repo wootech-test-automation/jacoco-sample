@@ -11,4 +11,14 @@ public interface PairmatchingContext {
     void inputMatchingDivision(MatchingDivision matchingDivision);
 
     String matchPair();
+
+    String rematchPair();
+
+    String findMatchedCrewsByMatchingDivision();
+
+    void plusTryCount();
+
+    void initializeRetryCount();
+
+    void initializeMatchingResult();
 }
