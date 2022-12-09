@@ -43,4 +43,12 @@ public class MatchingDivision {
     public int hashCode() {
         return Objects.hash(course, level, subject);
     }
+
+    public Course getCourse() {
+        return this.course;
+    }
+
+    public boolean isSameLevel(MatchingDivision matchingDivision) {
+        return this.level.equals(matchingDivision.level);
+    }
 }
