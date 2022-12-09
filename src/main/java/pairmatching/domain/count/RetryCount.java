@@ -8,7 +8,7 @@ public class RetryCount {
 
     private RetryCount(final int count) {
         if (count > MAX_COUNT) {
-            throw new IllegalStateException("더이상 시도할 수 없습니다.");
+            throw new IllegalStateException("3회이상 매칭을 시도할 수 없습니다.");
         }
         this.count = count;
     }
