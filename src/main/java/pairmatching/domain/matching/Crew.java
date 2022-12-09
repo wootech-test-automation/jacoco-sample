@@ -38,4 +38,8 @@ public class Crew {
     public int hashCode() {
         return Objects.hash(course, name);
     }
+
+    public String name() {
+        return this.name;
+    }
 }
