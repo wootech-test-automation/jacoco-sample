@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import pairmatching.exception.BeforeMatchedCrewException;
 import pairmatching.exception.DuplicatedMatchingDivisionException;
 import pairmatching.exception.MatchingDivisionDidNotExists;
 
@@ -18,7 +19,26 @@ public class MatchingResult {
     public void matchPair(MatchingDivision matchingDivision, List<Crew> crews) {
         validateDuplicatedKey(matchingDivision);
 
-        this.matchingResult.put(matchingDivision, generateMatchedCrews(new LinkedList<>(crews)));
+        var matchedResult = generateMatchedCrews(new LinkedList<>(crews));
+
+        validateSameLevelExistsMatchedCrew(matchingDivision, matchedResult);
+        this.matchingResult.put(matchingDivision, matchedResult);
+    }
+
+    /**
+     * 같은 레벨에서 매칭된 크루가 잇는지 검증합니다.
+     *
+     * @param matchedResult
+     */
+    private void validateSameLevelExistsMatchedCrew(MatchingDivision matchingDivision, MatchedCrews matchedResult) {
+       
+        var hasSameLevelMatchedCrews = this.matchingResult.entrySet().stream()
+                .filter(entry -> entry.getKey().isSameLevel(matchingDivision))
+                .anyMatch(entry -> entry.getValue().hasMatchedAtBefore(matchedResult));
+
+        if (hasSameLevelMatchedCrews) {
+            throw new BeforeMatchedCrewException();
+        }
     }
 
     private void validateDuplicatedKey(MatchingDivision matchingDivision) {
