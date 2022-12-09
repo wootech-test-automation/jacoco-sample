@@ -4,14 +4,24 @@ import pairmatching.launcher.context.PairmatchingContext;
 
 public class InputStatus implements PairmatchingStatus {
 
+    private final PairmatchingStatus nextStatus;
+
+    public InputStatus(PairmatchingStatus nextStatus) {
+        this.nextStatus = nextStatus;
+    }
+
     @Override
     public PairmatchingStatus next(PairmatchingContext pairmatchingContext) {
         var pairmatchingView = pairmatchingContext.getPairmatchingView();
-        var matchingDivision = pairmatchingView.getInputView().readPairmatchingDivision();
+        var inputView = pairmatchingView.getInputView();
+        var outputView = pairmatchingView.getOutputView();
 
-        pairmatchingContext.inputMatchingDivision(matchingDivision);
+        pairmatchingContext.initializeRetryCount();
 
-        return new MatchingProcessStatus();
+        outputView.printMatchingMenu();
+        pairmatchingContext.inputMatchingDivision(inputView.readPairmatchingDivision());
+
+        return nextStatus;
     }
 
     @Override
