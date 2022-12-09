@@ -9,6 +9,7 @@ public class SelectFeatureStatus implements PairmatchingStatus {
         var pairmatchingView = pairmatchingContext.getPairmatchingView();
         var featureCommand = pairmatchingView.getInputView().readFeatureCommand();
 
+        pairmatchingContext.initializeRetryCount();
         return CommandToStatusConvertor.getNextStatus(featureCommand);
     }
 
