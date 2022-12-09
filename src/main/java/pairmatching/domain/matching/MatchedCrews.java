@@ -20,4 +20,9 @@ public class MatchedCrews {
                 .map(MatchedCrew::result)
                 .collect(Collectors.joining("\n"));
     }
+
+    public boolean hasMatchedAtBefore(MatchedCrews targetMatchedCrews) {
+        return matchedCrewList.stream()
+                .anyMatch(matchedCrew -> matchedCrew.hasMatchedAtBefore(targetMatchedCrews.matchedCrewList));
+    }
 }
