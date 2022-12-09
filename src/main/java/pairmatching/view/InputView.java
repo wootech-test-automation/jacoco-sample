@@ -6,6 +6,7 @@ import pairmatching.domain.code.Course;
 import pairmatching.domain.code.Level;
 import pairmatching.domain.matching.MatchingDivision;
 import pairmatching.launcher.code.FeatureCommand;
+import pairmatching.launcher.code.RematchingCommand;
 
 public class InputView extends IoPrinter {
 
@@ -39,4 +40,9 @@ public class InputView extends IoPrinter {
     }
 
 
+    public RematchingCommand readReMatchingCommand() {
+        this.println("매칭 정보가 있습니다. 다시 매칭하시겠습니까?");
+        this.println(RematchingCommand.message());
+        return RematchingCommand.from(this.readLine());
+    }
 }
