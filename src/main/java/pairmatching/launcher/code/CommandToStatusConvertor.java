@@ -1,14 +1,15 @@
 package pairmatching.launcher.code;
 
 import java.util.Arrays;
-
+import pairmatching.launcher.status.FindMatchingResultStatus;
 import pairmatching.launcher.status.InputStatus;
+import pairmatching.launcher.status.MatchingProcessStatus;
 import pairmatching.launcher.status.PairmatchingStatus;
 import pairmatching.launcher.status.QuitStatus;
 
 public enum CommandToStatusConvertor {
-    MATCHING(FeatureCommand.MATCHING, new InputStatus()),
-    FIND(FeatureCommand.FIND),
+    MATCHING(FeatureCommand.MATCHING, new InputStatus(new MatchingProcessStatus())),
+    FIND(FeatureCommand.FIND, new InputStatus(new FindMatchingResultStatus())),
     INITIALIZE(FeatureCommand.INITIALIZE),
     QUIT(FeatureCommand.QUIT),
     UNKNOWN();
