@@ -32,13 +32,13 @@ public class CrewGenerator {
 
     private void validateDuplicatedCrew(List<Crew> generatedCrews) {
         if (generatedCrews.size() != new HashSet<>(generatedCrews).size()) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("크루의 이름이 중복됩니다.");
         }
     }
 
     private void validateCrewSizeIsGreaterThanMinSize(int size) {
         if (size < 2) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("매칭할 수 없습니다.");
         }
     }
 

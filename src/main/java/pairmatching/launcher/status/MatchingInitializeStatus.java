@@ -1,8 +1,6 @@
-package pairmatching.launcher.code;
+package pairmatching.launcher.status;
 
 import pairmatching.launcher.context.PairmatchingContext;
-import pairmatching.launcher.status.PairmatchingStatus;
-import pairmatching.launcher.status.SelectFeatureStatus;
 
 public class MatchingInitializeStatus implements PairmatchingStatus {
     @Override

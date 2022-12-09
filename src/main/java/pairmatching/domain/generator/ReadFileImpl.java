@@ -17,7 +17,7 @@ public class ReadFileImpl implements ReadFile {
         try {
             return Files.readAllLines(Paths.get(RESOURCES + fileName));
         } catch (IOException exception) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("잘못된 파일이거나 읽을 수 없습니다.");
         }
     }
 }
