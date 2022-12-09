@@ -1,5 +1,6 @@
 package pairmatching.domain.matching;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,5 +25,16 @@ public class MatchedCrew {
         return matchedCrew.stream()
                 .map(Crew::name)
                 .collect(Collectors.joining(" : "));
+    }
+
+    public boolean hasMatchedAtBefore(List<MatchedCrew> targetMatchedCrews) {
+        return targetMatchedCrews.stream()
+                .anyMatch(targetMatchedCrew -> targetMatchedCrew.hasMatchedAtBefore(this));
+    }
+
+    private boolean hasMatchedAtBefore(MatchedCrew matchedCrew) {
+        var union = new HashSet<>(matchedCrew.matchedCrew);
+        union.retainAll(this.matchedCrew);
+        return union.size() >= 2;
     }
 }
