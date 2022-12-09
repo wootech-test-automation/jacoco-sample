@@ -41,6 +41,7 @@ public class MatchingResult {
 
         var hasSameLevelMatchedCrews = this.matchingResult.entrySet().stream()
                 .filter(entry -> entry.getKey().isSameLevel(matchingDivision))
+                .filter(entry -> !entry.getKey().equals(matchingDivision)) // 등록된 구분값을 제외함
                 .anyMatch(entry -> entry.getValue().hasMatchedAtBefore(matchedResult));
 
         if (hasSameLevelMatchedCrews) {
