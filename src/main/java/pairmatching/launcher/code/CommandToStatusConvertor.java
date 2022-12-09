@@ -10,8 +10,8 @@ import pairmatching.launcher.status.QuitStatus;
 public enum CommandToStatusConvertor {
     MATCHING(FeatureCommand.MATCHING, new InputStatus(new MatchingProcessStatus())),
     FIND(FeatureCommand.FIND, new InputStatus(new FindMatchingResultStatus())),
-    INITIALIZE(FeatureCommand.INITIALIZE),
-    QUIT(FeatureCommand.QUIT),
+    INITIALIZE(FeatureCommand.INITIALIZE, new MatchingInitializeStatus()),
+    QUIT(FeatureCommand.QUIT, new QuitStatus()),
     UNKNOWN();
 
 
