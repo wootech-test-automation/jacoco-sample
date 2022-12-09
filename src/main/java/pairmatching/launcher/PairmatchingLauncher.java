@@ -7,6 +7,7 @@ import pairmatching.launcher.context.PairmatchingContext;
 import pairmatching.launcher.context.PairmatchingContextImpl;
 import pairmatching.launcher.status.InitStatus;
 import pairmatching.launcher.status.PairmatchingStatus;
+import pairmatching.launcher.status.QuitStatus;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 import pairmatching.view.PairmatchingView;
@@ -16,10 +17,8 @@ public class PairmatchingLauncher {
     private PairmatchingStatus pairmatchingStatus;
 
     public PairmatchingLauncher() {
-        this.pairmatchingContext = new PairmatchingContextImpl(
-                new PairmatchingView(new InputView(), new OutputView()),
-                new CrewGenerator(new ReadFileImpl(), new ShuffleGeneratorImpl())
-        );
+        this.pairmatchingContext = new PairmatchingContextImpl(new PairmatchingView(new InputView(), new OutputView()),
+                new CrewGenerator(new ReadFileImpl(), new ShuffleGeneratorImpl()));
 
     }
 
@@ -27,7 +26,14 @@ public class PairmatchingLauncher {
         this.pairmatchingStatus = new InitStatus();
 
         while (pairmatchingStatus.runnable()) {
-            pairmatchingStatus = pairmatchingStatus.next(pairmatchingContext);
+            try {
+                pairmatchingStatus = pairmatchingStatus.next(pairmatchingContext);
+            } catch (IllegalArgumentException exception) {
+                new OutputView().printError(exception.getMessage());
+            } catch (IllegalStateException exception) {
+                new OutputView().printError(exception.getMessage());
+                pairmatchingStatus = new QuitStatus();
+            }
         }
 
     }
