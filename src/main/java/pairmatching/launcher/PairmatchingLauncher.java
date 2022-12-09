@@ -14,27 +14,28 @@ import pairmatching.view.PairmatchingView;
 
 public class PairmatchingLauncher {
     private final PairmatchingContext pairmatchingContext;
-    private PairmatchingStatus pairmatchingStatus;
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+
+    private PairmatchingStatus pairmatchingStatus = new InitStatus();
 
     public PairmatchingLauncher() {
-        this.pairmatchingContext = new PairmatchingContextImpl(new PairmatchingView(new InputView(), new OutputView()),
-                new CrewGenerator(new ReadFileImpl(), new ShuffleGeneratorImpl()));
+        var pairMatchingView = new PairmatchingView(inputView, outputView);
+        var crewGenerator = new CrewGenerator(new ReadFileImpl(), new ShuffleGeneratorImpl());
 
+        this.pairmatchingContext = new PairmatchingContextImpl(pairMatchingView, crewGenerator);
     }
 
     public void execute() {
-        this.pairmatchingStatus = new InitStatus();
-
         while (pairmatchingStatus.runnable()) {
             try {
                 pairmatchingStatus = pairmatchingStatus.next(pairmatchingContext);
             } catch (IllegalArgumentException exception) {
-                new OutputView().printError(exception.getMessage());
+                outputView.printError(exception.getMessage());
             } catch (IllegalStateException exception) {
-                new OutputView().printError(exception.getMessage());
+                outputView.printError(exception.getMessage());
                 pairmatchingStatus = new QuitStatus();
             }
         }
-
     }
 }
