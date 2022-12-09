@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import pairmatching.launcher.code.MatchingInitializeStatus;
 import pairmatching.launcher.context.FakePairmatchingContext;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
