@@ -17,11 +17,18 @@ public class MatchingResult {
     }
 
     public void matchPair(MatchingDivision matchingDivision, List<Crew> crews) {
-        validateDuplicatedKey(matchingDivision);
+        this.validateDuplicatedKey(matchingDivision);
 
         var matchedResult = generateMatchedCrews(new LinkedList<>(crews));
 
-        validateSameLevelExistsMatchedCrew(matchingDivision, matchedResult);
+        this.validateSameLevelExistsMatchedCrew(matchingDivision, matchedResult);
+        this.matchingResult.put(matchingDivision, matchedResult);
+    }
+
+    public void rematchPair(MatchingDivision matchingDivision, List<Crew> crews) {
+        var matchedResult = generateMatchedCrews(new LinkedList<>(crews));
+
+        this.validateSameLevelExistsMatchedCrew(matchingDivision, matchedResult);
         this.matchingResult.put(matchingDivision, matchedResult);
     }
 
@@ -31,7 +38,7 @@ public class MatchingResult {
      * @param matchedResult
      */
     private void validateSameLevelExistsMatchedCrew(MatchingDivision matchingDivision, MatchedCrews matchedResult) {
-       
+
         var hasSameLevelMatchedCrews = this.matchingResult.entrySet().stream()
                 .filter(entry -> entry.getKey().isSameLevel(matchingDivision))
                 .anyMatch(entry -> entry.getValue().hasMatchedAtBefore(matchedResult));
@@ -73,4 +80,6 @@ public class MatchingResult {
         }
         return this.matchingResult.get(matchingDivision).result();
     }
+
+
 }
