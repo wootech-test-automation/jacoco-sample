@@ -1,7 +1,9 @@
 package pairmatching.domain.enums;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import pairmatching.message.ErrorMessage;
 
 /**
  *  자동차경주 | 로또 | 숫자야구게임
@@ -22,6 +24,21 @@ public enum Level {
     Level(final String name, final List<Mission> missions) {
         this.name = name;
         this.missions = missions;
+    }
+
+    public static Level findLevel(final String inputLevel) {
+        return Arrays.stream(Level.values())
+                .filter(level -> level.containsLevel(inputLevel))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NO_LEVEL_ERROR));
+    }
+
+    private boolean containsLevel(final String inputLevel) {
+        return name.equals(inputLevel);
+    }
+
+    public boolean isExistsMission(final Mission mission) {
+        return missions.contains(mission);
     }
 
 // 추가 기능 구현
