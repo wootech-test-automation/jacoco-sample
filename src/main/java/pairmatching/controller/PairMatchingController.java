@@ -32,13 +32,13 @@ public class PairMatchingController {
         if (validatedSelectMenu.equals(InputValidator.PAIR_RESET)) {
             requestPairReset();
         }
-        run();
     }
 
     private void requestPairMatching() {
         List<String> courseInformation = InputValidator.validateCourseInformation(inputView.inputCourseInformation());
         try {
-            pairMatchingService.pairMatch(courseInformation);
+            outputView.printPairMatchingResult(pairMatchingService.pairMatch(courseInformation));
+            run();
         } catch (PairAlreadyExistException exception) {
             requestRetry(courseInformation);
         } catch (IllegalArgumentException exception) {
@@ -50,7 +50,8 @@ public class PairMatchingController {
     private void requestRetry(final List<String> courseInformation) {
         try {
             if (InputValidator.validateRetryInput(inputView.inputRetry()).equals(RETRY)) {
-                pairMatchingService.retryPairMatching(courseInformation);
+                outputView.printPairMatchingResult(pairMatchingService.retryPairMatching(courseInformation));
+                run();
             }
         } catch (IllegalArgumentException exception) {
             outputView.printMessage(exception.getMessage());

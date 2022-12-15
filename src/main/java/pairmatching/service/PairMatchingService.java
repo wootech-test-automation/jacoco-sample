@@ -1,5 +1,6 @@
 package pairmatching.service;
 
+import java.nio.channels.Pipe;
 import java.util.List;
 import pairmatching.domain.CourseInformation;
 import pairmatching.domain.Crews;
@@ -14,9 +15,9 @@ public class PairMatchingService {
     public static final int MAX_TRY = 3;
     private final MatchingCrewRepository matchingCrewRepository = MatchingCrewRepository.getInstance();
 
-    public void retryPairMatching(final List<String> inputInformation) {
+    public List<Pair> retryPairMatching(final List<String> inputInformation) {
         CourseInformation courseInformation = CourseInformation.of(inputInformation);
-        matchCrew(courseInformation, 0);
+        return matchCrew(courseInformation, 0);
     }
 
     public List<Pair> pairMatch(final List<String> inputInformation) {
