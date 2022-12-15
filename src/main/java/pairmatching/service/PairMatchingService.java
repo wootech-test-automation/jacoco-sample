@@ -26,7 +26,8 @@ public class PairMatchingService {
 
     private List<Pair> matchCrew(final CourseInformation courseInformation, final int matchTryCount) {
         checkTryCount(matchTryCount);
-        Crews shuffledCrews = ShuffleUtil.ShuffleCrews(CrewRepository.findAllByCourse(courseInformation.getCourse()));
+        Crews shuffledCrews = ShuffleUtil.ShuffleCrews(CrewRepository.findAllByCourse(courseInformation.getCourse()),
+                courseInformation.getCourse());
         List<Pair> pairs = shuffledCrews.makePairList();
         if (hasSamePairInList(courseInformation, pairs)) {
             matchCrew(courseInformation, matchTryCount + 1);

@@ -1,18 +1,14 @@
 package pairmatching.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Crews {
     private final List<Crew> crews;
 
     public Crews(final List<Crew> crews) {
         this.crews = crews;
-    }
-
-    public List<Crew> getCrewList() {
-        return Collections.unmodifiableList(crews);
     }
 
     public List<Pair> makePairList() {
@@ -44,5 +40,11 @@ public class Crews {
             }
         }
         return pairs;
+    }
+
+    public List<String> getCrewNameList() {
+        return crews.stream()
+                .map(Crew::getName)
+                .collect(Collectors.toList());
     }
 }
