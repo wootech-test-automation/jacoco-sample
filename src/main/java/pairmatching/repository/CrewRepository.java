@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import pairmatching.domain.Crew;
+import pairmatching.domain.Crews;
 import pairmatching.domain.enums.Course;
 import pairmatching.message.ErrorMessage;
 
@@ -39,5 +40,11 @@ public class CrewRepository {
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException(ErrorMessage.FILE_NOT_FOUND_ERROR);
         }
+    }
+
+    public static Crews findAllByCourse(final Course course) {
+        return new Crews(store.stream()
+                .filter(crew -> crew.containsCourse(course))
+                .collect(Collectors.toList()));
     }
 }
