@@ -8,6 +8,7 @@ import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 
 public class PairMatchingController {
+    public static final String RETRY = "네";
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
     private final PairMatchingService pairMatchingService = new PairMatchingService();
@@ -31,6 +32,7 @@ public class PairMatchingController {
         if (validatedSelectMenu.equals(InputValidator.PAIR_RESET)) {
             requestPairReset();
         }
+        run();
     }
 
     private void requestPairMatching() {
@@ -46,7 +48,14 @@ public class PairMatchingController {
     }
 
     private void requestRetry(final List<String> courseInformation) {
-        pairMatchingService.retryPairMatching(courseInformation);
+        try {
+            if (InputValidator.validateRetryInput(inputView.inputRetry()).equals(RETRY)) {
+                pairMatchingService.retryPairMatching(courseInformation);
+            }
+        } catch (IllegalArgumentException exception) {
+            outputView.printMessage(exception.getMessage());
+            requestRetry(courseInformation);
+        }
     }
 
     private void requestPairReset() {

@@ -12,6 +12,8 @@ public class InputValidator {
     public static final String QUIT = "Q";
     public static final String SEPARATOR = ", ";
     public static final int NEED_SIZE_INPUT = 3;
+    public static final String YES = "네";
+    public static final String NO = "아니오";
 
     private InputValidator() {
     }
@@ -32,5 +34,12 @@ public class InputValidator {
         }
         return Arrays.stream(userInput.split(SEPARATOR))
                 .collect(Collectors.toList());
+    }
+
+    public static String validateRetryInput(final String userInput) {
+        if (!userInput.equals(YES) && !userInput.equals(NO)) {
+            throw new IllegalArgumentException(ErrorMessage.RETRY_INPUT_ERROR);
+        }
+        return userInput;
     }
 }
