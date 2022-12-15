@@ -10,6 +10,12 @@ public class Pair {
         this.pair = pair;
     }
 
+    public boolean containsPair(List<Pair> pairs) {
+        return pairs.stream()
+                .map(input -> input.pair)
+                .anyMatch(pair -> pair.containsAll(this.pair));
+    }
+
     @Override
     public String toString() {
         StringBuilder log = new StringBuilder();

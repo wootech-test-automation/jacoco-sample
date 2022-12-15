@@ -37,8 +37,7 @@ public class PairMatchingService {
     }
 
     private boolean hasSamePairInList(final CourseInformation courseInformation, final List<Pair> pairs) {
-//        matchingCrewRepository.find
-        return false;
+        return matchingCrewRepository.hasEqualMatchedCrew(courseInformation, pairs);
     }
 
     private void checkTryCount(final int matchTryCount) {

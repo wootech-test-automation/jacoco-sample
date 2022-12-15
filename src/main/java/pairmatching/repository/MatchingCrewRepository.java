@@ -3,8 +3,10 @@ package pairmatching.repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import pairmatching.domain.CourseInformation;
 import pairmatching.domain.Pair;
+import pairmatching.domain.enums.Level;
 import pairmatching.exception.NoPariResultException;
 import pairmatching.message.ErrorMessage;
 
@@ -38,4 +40,19 @@ public class MatchingCrewRepository {
     public void deleteAll() {
         store.clear();
     }
+
+    public boolean hasEqualMatchedCrew(final CourseInformation courseInformation, final List<Pair> pairs) {
+        return store.keySet()
+                .stream()
+                .filter(key -> key.getLevel() == courseInformation.getLevel())
+                .map(store::get)
+                .anyMatch(findPairs -> hasSameMatchedPair(findPairs, pairs));
+    }
+
+    private boolean hasSameMatchedPair(final List<Pair> findPairs, final List<Pair> pairs) {
+        return findPairs.stream()
+                .anyMatch(findPair -> findPair.containsPair(pairs));
+
+    }
+
 }
