@@ -18,8 +18,8 @@ public class OutputView {
     private String createPairResultMessage(final List<Pair> pairMatch) {
         StringBuilder message = new StringBuilder();
         Arrays.stream(pairMatch.toString()
-                .replaceAll("(?:\\[|null|\\]|)", "")
-                .split(","))
+                        .replaceAll("(?:\\[|null|\\]|)", "")
+                        .split(","))
                 .forEach(match -> message.append(match.trim()).append("\n"));
         return message.toString();
     }

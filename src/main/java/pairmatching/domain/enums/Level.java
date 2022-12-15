@@ -6,10 +6,7 @@ import java.util.List;
 import pairmatching.message.ErrorMessage;
 
 /**
- *  자동차경주 | 로또 | 숫자야구게임
- *   - 레벨2: 장바구니 | 결제 | 지하철노선도
- *   - 레벨3:
- *   - 레벨4: 성능개선 | 배포
+ * 자동차경주 | 로또 | 숫자야구게임 - 레벨2: 장바구니 | 결제 | 지하철노선도 - 레벨3: - 레벨4: 성능개선 | 배포
  */
 public enum Level {
     LEVEL1("레벨1", List.of(Mission.CAR_RACING, Mission.LOTTO, Mission.BASEBALL)),

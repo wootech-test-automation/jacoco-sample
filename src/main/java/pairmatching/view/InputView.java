@@ -1,8 +1,6 @@
 package pairmatching.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
-import pairmatching.domain.enums.Course;
 
 public class InputView {
 
