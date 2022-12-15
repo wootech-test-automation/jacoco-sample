@@ -1,6 +1,7 @@
 package pairmatching.controller;
 
 import java.util.List;
+import pairmatching.exception.NoPariResultException;
 import pairmatching.exception.PairAlreadyExistException;
 import pairmatching.service.PairMatchingService;
 import pairmatching.util.InputValidator;
@@ -64,7 +65,18 @@ public class PairMatchingController {
     }
 
     private void requestPairView() {
-        System.out.println("pass");
+        try {
+            List<String> courseInformation = InputValidator.validateCourseInformation(
+                    inputView.inputCourseInformation());
+            outputView.printPairMatchingResult(pairMatchingService.findPairMatchResult(courseInformation));
+        } catch (NoPariResultException exception) {
+            outputView.printMessage(exception.getMessage());
+            run();
+        } catch (IllegalArgumentException exception) {
+            outputView.printMessage(exception.getMessage());
+            requestPairView();
+        }
+
     }
 
 }

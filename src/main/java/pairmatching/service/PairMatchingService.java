@@ -1,6 +1,5 @@
 package pairmatching.service;
 
-import java.nio.channels.Pipe;
 import java.util.List;
 import pairmatching.domain.CourseInformation;
 import pairmatching.domain.Crews;
@@ -29,14 +28,15 @@ public class PairMatchingService {
         checkTryCount(matchTryCount);
         Crews shuffledCrews = ShuffleUtil.ShuffleCrews(CrewRepository.findAllByCourse(courseInformation.getCourse()));
         List<Pair> pairs = shuffledCrews.makePairList();
-        if (hasSamePairInList(pairs)) {
+        if (hasSamePairInList(courseInformation, pairs)) {
             matchCrew(courseInformation, matchTryCount + 1);
         }
         matchingCrewRepository.savePairMatching(courseInformation, pairs);
         return pairs;
     }
 
-    private boolean hasSamePairInList(final List<Pair> pairs) {
+    private boolean hasSamePairInList(final CourseInformation courseInformation, final List<Pair> pairs) {
+//        matchingCrewRepository.find
         return false;
     }
 
@@ -51,5 +51,10 @@ public class PairMatchingService {
             throw new PairAlreadyExistException();
         }
         return courseInformation;
+    }
+
+    public List<Pair> findPairMatchResult(final List<String> inputInformation) {
+        CourseInformation courseInformation = CourseInformation.of(inputInformation);
+        return matchingCrewRepository.findPairMatching(courseInformation);
     }
 }

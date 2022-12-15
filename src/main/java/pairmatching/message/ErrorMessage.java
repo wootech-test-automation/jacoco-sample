@@ -13,6 +13,7 @@ public class ErrorMessage {
     public static final String NO_MISSION_IN_LEVEL_ERROR = "[ERROR] 해당 레벨에 존재하지 않는 미션입니다.";
     public static final String LIMIT_PAIR_MATCH_TRY_ERROR = "[ERROR] 중복된 페어가 존재하여 매칭할 수 없습니다.";
     public static final String RETRY_INPUT_ERROR = "[ERROR] 네, 아니오만 입력해야 합니다.";
+    public static final String NO_PAIR_MATCHING_RESULT = "[ERROR] 매칭 이력이 없습니다.";
 
     private ErrorMessage() {
     }
