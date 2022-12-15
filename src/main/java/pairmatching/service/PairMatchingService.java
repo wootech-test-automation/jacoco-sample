@@ -57,4 +57,8 @@ public class PairMatchingService {
         CourseInformation courseInformation = CourseInformation.of(inputInformation);
         return matchingCrewRepository.findPairMatching(courseInformation);
     }
+
+    public void deleteAllMatchingResult() {
+        matchingCrewRepository.deleteAll();
+    }
 }

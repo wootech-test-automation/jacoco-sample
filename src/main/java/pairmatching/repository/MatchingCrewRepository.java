@@ -34,4 +34,8 @@ public class MatchingCrewRepository {
         }
         return store.get(courseInformation);
     }
+
+    public void deleteAll() {
+        store.clear();
+    }
 }

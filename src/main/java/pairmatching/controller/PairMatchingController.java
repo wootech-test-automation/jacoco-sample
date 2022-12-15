@@ -60,15 +60,12 @@ public class PairMatchingController {
         }
     }
 
-    private void requestPairReset() {
-        System.out.println("pass");
-    }
-
     private void requestPairView() {
         try {
             List<String> courseInformation = InputValidator.validateCourseInformation(
                     inputView.inputCourseInformation());
             outputView.printPairMatchingResult(pairMatchingService.findPairMatchResult(courseInformation));
+            run();
         } catch (NoPariResultException exception) {
             outputView.printMessage(exception.getMessage());
             run();
@@ -76,7 +73,11 @@ public class PairMatchingController {
             outputView.printMessage(exception.getMessage());
             requestPairView();
         }
-
     }
 
+    private void requestPairReset() {
+        outputView.printResetMessage();
+        pairMatchingService.deleteAllMatchingResult();
+        run();
+    }
 }

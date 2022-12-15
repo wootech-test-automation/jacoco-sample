@@ -23,4 +23,8 @@ public class OutputView {
                 .forEach(match -> message.append(match.trim()).append("\n"));
         return message.toString();
     }
+
+    public void printResetMessage() {
+        System.out.println("초기화 되었습니다.");
+    }
 }
