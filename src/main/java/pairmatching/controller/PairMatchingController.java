@@ -30,7 +30,7 @@ public class PairMatchingController {
     }
 
     private void requestPairMatching() {
-        System.out.println("pass");
+        InputValidator.validateCourseInformation(inputView.inputCourseInformation());
     }
 
     private void requestPairReset() {

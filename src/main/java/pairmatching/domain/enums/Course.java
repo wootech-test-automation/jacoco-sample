@@ -10,5 +10,4 @@ public enum Course {
         this.name = name;
     }
 
-    // 추가 기능 구현
 }
